@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Cat.iml" filepath="$PROJECT_DIR$/Cat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/java_skillbox.iml" filepath="$PROJECT_DIR$/.idea/java_skillbox.iml" />
     </modules>
   </component>
 </project>
